@@ -1,1 +1,1 @@
-# yr1cw_algorithms
+# COMP1819 Algorithms Coursework
