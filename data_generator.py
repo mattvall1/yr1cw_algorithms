@@ -16,7 +16,7 @@ def generate_coordinates(data_length):
         x2 = randint(0, 100)
         y2 = randint(0, 100)
         # Add coordinates to data structure
-        coords_to_return.append({(x1, y1), (x2, y2)})
+        coords_to_return.append([[x1, y1], [x2, y2]])
 
     return coords_to_return
 
