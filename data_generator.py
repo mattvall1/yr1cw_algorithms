@@ -5,9 +5,10 @@
 """
 from random import randint
 
+
 # Function to generate coordinates
-def generate_coordinates(data_length):
-    coords_to_return = []
+def generate_coordinates(data_length, to_console):
+    coords = []
     # Loop
     for num in range(1, data_length):
         # Generate 4 random coordinates
@@ -16,9 +17,19 @@ def generate_coordinates(data_length):
         x2 = randint(0, 100)
         y2 = randint(0, 100)
         # Add coordinates to data structure
-        coords_to_return.append([[x1, y1], [x2, y2]])
+        coords.append([[x1, y1], [x2, y2]])
 
-    return coords_to_return
+    # Write data to text file - if option is chosen, else print to terminal
+    if to_console:
+        return coords
+    else:
+        try:
+            with open('data.txt', 'w') as f:
+                f.write(str(coords))
+            return "Complete"
+        except:
+            return "Fail"
 
-# Run data generation - change first parameter for different lengths of data
-print(generate_coordinates(10000))
+
+# Run data generation - change first parameter for different lengths of data, change second parameter to print to text file
+print(generate_coordinates(10000, False))
