@@ -13,10 +13,10 @@ def generate_coordinates(data_length, to_console):
     # Loop
     for num in range(1, data_length):
         # Generate 4 random coordinates
-        x1 = randint(0, 100)
-        y1 = randint(0, 100)
-        x2 = randint(0, 100)
-        y2 = randint(0, 100)
+        x1 = randint(-100, 100)
+        y1 = randint(-100, 100)
+        x2 = randint(-100, 100)
+        y2 = randint(-100, 100)
         # Add coordinates to data structure
         coords.append([[x1, y1], [x2, y2]])
 
