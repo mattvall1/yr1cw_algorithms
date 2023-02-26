@@ -1,6 +1,7 @@
 """
+    Copyright © 2023 Matthew Vallance, All rights reserved.
     Author: Matthew Vallance 001225832
-    Purpose: Script to generate data for the coursework question in the following format: {(x1, y1), (x2, y2)}
+    Description: Script to generate data for the coursework question in the following format: {(x1, y1), (x2, y2)}
     Date: 21/02/23
 """
 from random import randint
