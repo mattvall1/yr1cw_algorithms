@@ -31,4 +31,4 @@ def generate_coordinates(data_length, to_console):
 
 
 # Run data generation - change first parameter for different lengths of data, change second parameter to print to text file
-print(generate_coordinates(10000, False))
+print(generate_coordinates(100000, False))
