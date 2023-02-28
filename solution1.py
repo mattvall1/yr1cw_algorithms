@@ -7,7 +7,9 @@
 # Get data from external file to keep this one clean
 from data_generator import data
 
+# Setup variables
 coordinates = data.coordinates  # Get only first few items while we work on the solution
+erroneous_data = []
 
 # Counts for where each set of coordinates are
 total_count = 0
@@ -27,7 +29,7 @@ for coordinate_set in coordinates:
         x = int(coordinate_set[0])
         y = int(coordinate_set[1])
     except ValueError:
-        print("Invalid data at position:", total_count ,"- check and retry")
+        erroneous_data.append(str(total_count))
 
     # If statement to check where each set of coords is located
     if x > 0 and y > 0:
@@ -52,7 +54,10 @@ for coordinate_set in coordinates:
             west += 1
 
     total_count += 1
-
+    
+# Print invalid data locations if needed
+if len(erroneous_data) > 0:
+    print("Invalid data at position:", ", ".join(erroneous_data), "- check and retry")
 
 # Print results
 print('Top left: ', top_left)
@@ -64,5 +69,3 @@ print('North: ', north)
 print('East:', east)
 print('South: ', south)
 print('West: ', west)
-
-
