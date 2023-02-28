@@ -12,16 +12,7 @@ coordinates = data.coordinates  # Get only first few items while we work on the 
 erroneous_data = []
 
 # Counts for where each set of coordinates are
-total_count = 0
-top_left = 0
-top_right = 0
-bottom_left = 0
-bottom_right = 0
-origin = 0
-north = 0
-east = 0
-south = 0
-west = 0
+processed_data = {'total_count': 0, 'top_left': 0, 'top_right': 0, 'bottom_left': 0, 'bottom_right': 0, 'origin': 0, 'north': 0, 'east': 0, 'south': 0, 'west': 0}
 
 for coordinate_set in coordinates:
     # Split set into 'x' and 'y' variables (x = horizontal, y = vertical)
@@ -29,43 +20,43 @@ for coordinate_set in coordinates:
         x = int(coordinate_set[0])
         y = int(coordinate_set[1])
     except ValueError:
-        erroneous_data.append(str(total_count))
+        erroneous_data.append(str(processed_data['total_count']))
 
     # If statement to check where each set of coords is located
     if x > 0 and y > 0:
-        top_right += 1
+        processed_data['top_right'] += 1
     elif x < 0 and y > 0:
-        top_left += 1
+        processed_data['top_left'] += 1
     elif x < 0 and y < 0:
-        bottom_left += 1
+        processed_data['bottom_left'] += 1
     elif x > 0 and y < 0:
-        bottom_right += 1
+        processed_data['bottom_right'] += 1
     else:
         # Must be on axis or origin
         if x == 0 and y == 0:
-            origin += 1
+            processed_data['origin'] += 1
         elif x == 0 and y > 0:
-            north += 1
+            processed_data['north'] += 1
         elif x == 0 and y < 0:
-            south += 1
+            processed_data['south'] += 1
         elif x > 0 and y == 0:
-            east += 1
+            processed_data['east'] += 1
         elif x < 0 and y == 0:
-            west += 1
+            processed_data['west'] += 1
 
-    total_count += 1
-    
+    processed_data['total_count'] += 1
+
 # Print invalid data locations if needed
 if len(erroneous_data) > 0:
     print("Invalid data at position:", ", ".join(erroneous_data), "- check and retry")
 
 # Print results
-print('Top left: ', top_left)
-print('Top right: ', top_right)
-print('Bottom left: ', bottom_left)
-print('Bottom right: ', bottom_right)
+print('Top left quadrant: ', processed_data['top_left'])
+print('Top right quadrant: ', processed_data['top_right'])
+print('Bottom left quadrant: ', processed_data['bottom_left'])
+print('Bottom right quadrant: ', processed_data['bottom_right'])
 
-print('North: ', north)
-print('East:', east)
-print('South: ', south)
-print('West: ', west)
+print('North: ', processed_data['north'])
+print('East:', processed_data['east'])
+print('South: ', processed_data['south'])
+print('West: ', processed_data['west'])
