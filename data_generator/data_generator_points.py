@@ -28,7 +28,3 @@ def generate_coordinates(data_length, to_console):
             return "Complete"
         except:
             return "Fail"
-
-
-# Run data generation - change first parameter for different lengths of data, change second parameter to print to text file
-print(generate_coordinates(100000, False))
