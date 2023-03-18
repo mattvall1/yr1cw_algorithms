@@ -5,6 +5,7 @@ Description: My final solution to the coursework problem provided.
 """
 import random
 import time
+import test_data
 
 def generate_coords():
     # generates pairs of coordinates
@@ -52,14 +53,28 @@ def quadrants(coords):
         origin.append(coords)
         print("Points on origin =", origin)
 
-# establishes the start of the program
-start = time.time()
-i = 0
-# establishing how many pairs of coordinates need to be generated, in this case 10000
-for i in range (0, 100000):
-    # calls the starting function
-    generate_coords()
-    i = i + 1
+# Lengths list for testing automation
+lengths = [5000, 10000, 15000, 20000, 25000, 30000, 35000, 40000, 45000, 50000, 55000, 60000, 65000, 70000, 75000, 80000, 85000, 90000, 95000, 100000]
+to_write = ""
+for length in lengths:
+    data_name = f"data_{length}"
 
-end = time.time()
-print("time is ",end - start)
+    # Run three times
+    for i in range(0, 3):
+        # establishes the start of the program
+        start = time.time()
+        x = 0
+        # establishing how many pairs of coordinates need to be generated, in this case 10000
+        for x in range(0, len(getattr(test_data, data_name))):
+            # calls the starting function
+            coords = getattr(test_data, data_name)[x][0],getattr(test_data, data_name)[x][1]
+            quadrants(coords)
+            x = x + 1
+        end = time.time()
+
+        to_write += str(length)+" points time: " + str(end - start)
+        to_write += '\n'
+
+# Write results to a text file - easier than pulling this information from the console
+with open('results.txt', 'w') as f:
+    f.write(to_write)
