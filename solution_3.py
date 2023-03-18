@@ -1,13 +1,15 @@
 """
 Author: Varnika Mogali
-Description: Coursework solution
-Date: 27/02/23
+Description: This is my coursework solution which includes time complexity
+and varying data lengths so that large inputs can be tested to see how the run times vary for each.
+Date: 15/03/23
 """
 
-# randint from random to generate random coordinates.
-# Queue from queue to create a queue data structure.
+
 from random import randint
 from queue import Queue
+import time
+start = time.time()
 
 """ 
 This is a function that finds which quadrant the coordinates are located in,
@@ -147,12 +149,19 @@ iterates through each pair, and uses the `find_quadrant' function.
 
 def find_quadrants(coords):
     for coord in coords:
-        print(f"{coord}: {find_quadrant(coord)}")
+        find_quadrant(coord)
 
 
-# This generates coordinates and sorts them
-coords = generate_coordinates(10000, True)
-sorted_coords = sort_coordinates(coords)
+# Now we can see how different large inputs affect the time complexity of my solution.
+data_lengths = [50000]
 
-# This finds the quadrants for each of the coordinate pairs
-find_quadrants(sorted_coords)
+for data_length in data_lengths:
+    # Generates coordinates
+    coords = generate_coordinates(data_length,True)
+    sorted_coords=sort_coordinates(coords)
+
+    # Finds the quadrant for each coordinate pair
+    find_quadrants(sorted_coords)
+
+end = time.time()
+print("time is ",end - start)
