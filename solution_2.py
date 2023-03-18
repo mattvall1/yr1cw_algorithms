@@ -5,17 +5,16 @@
     Date: 26/02/23
 """
 # Get data from external file to keep this one clean
-from data_generator import data_generator_points
+import test_data
 import time
 
-# Get generated data
-coordinates = data_generator_points.generate_coordinates(100000, True)
 
 def process_coords(coordinates):
     # Setup variables
     erroneous_data = []
     # Counts for where each set of coordinates are
-    coord_counts = {'total_count': 0, 'top_left': 0, 'top_right': 0, 'bottom_left': 0, 'bottom_right': 0, 'origin': 0, 'north': 0, 'east': 0, 'south': 0, 'west': 0}
+    coord_counts = {'total_count': 0, 'top_left': 0, 'top_right': 0, 'bottom_left': 0, 'bottom_right': 0, 'origin': 0,
+                    'north': 0, 'east': 0, 'south': 0, 'west': 0}
 
     for coordinate_set in coordinates:
         # Split set into 'x' and 'y' variables (x = horizontal, y = vertical)
@@ -56,22 +55,29 @@ def process_coords(coordinates):
     # Return data
     return coord_counts
 
-# Measure performance
-start = time.time()
 
-processed_data = process_coords(coordinates)
+lengths = [5000, 10000, 15000, 20000, 25000, 30000, 35000, 40000, 45000, 50000, 55000, 60000, 65000, 70000, 75000, 80000, 85000, 90000, 95000, 100000]
+for length in lengths:
+    data_name = f"data_{length}"
 
-end = time.time()
-print(end - start)
+    # Measure performance
+    print('---- Performance of', str(length), 'data points ----')
+    # Loop three times to get accurate performance measure
+    for i in range(0, 3):
+        start = time.time()
+        # Run algorithm with each length of data
+        processed_data = process_coords(getattr(test_data, data_name))
+        end = time.time()
+        print(end - start)
 
+        # Print results
+        print('Top left quadrant: ', processed_data['top_left'])
+        print('Top right quadrant: ', processed_data['top_right'])
+        print('Bottom left quadrant: ', processed_data['bottom_left'])
+        print('Bottom right quadrant: ', processed_data['bottom_right'])
 
-# Print results
-print('Top left quadrant: ', processed_data['top_left'])
-print('Top right quadrant: ', processed_data['top_right'])
-print('Bottom left quadrant: ', processed_data['bottom_left'])
-print('Bottom right quadrant: ', processed_data['bottom_right'])
+        print('North: ', processed_data['north'])
+        print('East:', processed_data['east'])
+        print('South: ', processed_data['south'])
+        print('West: ', processed_data['west'])
 
-print('North: ', processed_data['north'])
-print('East:', processed_data['east'])
-print('South: ', processed_data['south'])
-print('West: ', processed_data['west'])
