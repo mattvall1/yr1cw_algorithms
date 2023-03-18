@@ -23,8 +23,12 @@ def generate_coordinates(data_length, to_console):
         return coords
     else:
         try:
-            with open('data.txt', 'w') as f:
-                f.write(str(coords))
+            with open('data_' + str(data_length) + '.py', 'w') as f:
+                f.write('data = ' + str(coords))
             return "Complete"
         except:
             return "Fail"
+
+
+# Run data generation - change first parameter for different lengths of data, change second parameter to print to text file
+print(generate_coordinates(5000, False))
