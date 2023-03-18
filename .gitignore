@@ -4,3 +4,4 @@ venv/
 .idea/
 data_generator/data.txt
 data_generator/__pycache__
+results.txt
