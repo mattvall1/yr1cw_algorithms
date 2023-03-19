@@ -7,6 +7,7 @@ import random
 import time
 import test_data
 
+# Unused function
 def generate_coords():
     # generates pairs of coordinates
     x = random.randint(-100,100)
@@ -76,5 +77,5 @@ for length in lengths:
         to_write += '\n'
 
 # Write results to a text file - easier than pulling this information from the console
-with open('results.txt', 'w') as f:
+with open('results_1.txt', 'w') as f:
     f.write(to_write)
