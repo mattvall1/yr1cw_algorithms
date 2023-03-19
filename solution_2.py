@@ -57,9 +57,10 @@ def process_coords(coordinates):
 
 # Lengths list for testing automation
 lengths = [5000, 10000, 15000, 20000, 25000, 30000, 35000, 40000, 45000, 50000, 55000, 60000, 65000, 70000, 75000, 80000, 85000, 90000, 95000, 100000]
-to_write = ""
+to_write = "Length,T1,T2,T3\n"
 for length in lengths:
     data_name = f"data_{length}"
+    tests = ""
 
     # Measure performance
     print('---- Performance of', str(length), 'data points ----')
@@ -70,9 +71,8 @@ for length in lengths:
         processed_data = process_coords(getattr(test_data, data_name))
         end = time.time()
 
-        # Write results to file
-        to_write += str(length) + " points time: " + str(end - start)
-        to_write += '\n'
+        # Add timings to CS string
+        tests += str(end - start) + ","
 
         # Print results to console
         print('Top left quadrant: ', processed_data['top_left'])
@@ -85,6 +85,9 @@ for length in lengths:
         print('South: ', processed_data['south'])
         print('West: ', processed_data['west'])
 
+    # Format CSV
+    to_write += str(length) + "," + tests + '\n'
+
 # Write results to a text file - easier than pulling this information from the console
-with open('results_2.txt', 'w') as f:
+with open('results_2.csv', 'w') as f:
     f.write(to_write)

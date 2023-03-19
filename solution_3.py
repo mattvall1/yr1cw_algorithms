@@ -9,7 +9,7 @@ Date: 15/03/23
 from random import randint
 from queue import Queue
 import time
-start = time.time()
+import test_data
 
 """ 
 This is a function that finds which quadrant the coordinates are located in,
@@ -19,21 +19,20 @@ If the point is on an axis or at the origin, the function returns a statement st
 
 
 def find_quadrant(coord):
-    x1, y1 = coord[0]
-    x2, y2 = coord[1]
-    if x1 == 0 and y1 == 0 and x2 == 0 and y2 == 0:
+    x1, y1 = coord
+    if x1 == 0 and y1 == 0:
         return "Origin"
-    elif x1 == 0 and x2 == 0:
+    elif x1 == 0:
         return "On the y-axis"
-    elif y1 == 0 and y2 == 0:
+    elif y1 == 0:
         return "On the x-axis"
-    elif x1 > 0 and x2 > 0 and y1 > 0 and y2 > 0:
+    elif x1 > 0 and y1 > 0:
         return "Quadrant 1"
-    elif x1 < 0 and x2 < 0 and y1 > 0 and y2 > 0:
+    elif x1 < 0 and y1 > 0:
         return "Quadrant 2"
-    elif x1 < 0 and x2 < 0 and y1 < 0 and y2 < 0:
+    elif x1 < 0 and y1 < 0:
         return "Quadrant 3"
-    elif x1 > 0 and x2 > 0 and y1 < 0 and y2 < 0:
+    elif x1 > 0 and y1 < 0:
         return "Quadrant 4"
     else:
         return "Boundary point"
@@ -53,23 +52,16 @@ Code version: Python3
 """
 
 
-def generate_coordinates(data_length, to_console=True):
+def process_coordinates(data):
     coords = Queue()
-    for num in range(1, data_length):
-        x1 = randint(-100, 100)
-        y1 = randint(-100, 100)
-        x2 = randint(-100, 100)
-        y2 = randint(-100, 100)
-        coords.put(((x1, y1), (x2, y2)))
-    if to_console:
-        return coords
-    else:
-        try:
-            with open('data.txt', 'w') as f:
-                f.write(str(list(coords.queue)))
-            return "Complete"
-        except:
-            return "Fail"
+    for i in range(1, len(data)):
+        c_set = data[i]
+        print(c_set)
+        x = c_set[0]
+        y = c_set[1]
+        coords.put((x, y))
+
+    return coords
 
 
 """
@@ -153,15 +145,30 @@ def find_quadrants(coords):
 
 
 # Now we can see how different large inputs affect the time complexity of my solution.
-data_lengths = [50000]
+lengths = [5000, 10000, 15000, 20000, 25000, 30000, 35000, 40000, 45000, 50000, 55000, 60000, 65000, 70000, 75000, 80000, 85000, 90000, 95000, 100000]
+to_write = "Length,T1,T2,T3\n"
+# for length in lengths:
+data_lengths = [2]
+for length in lengths:
+    data_name = f"data_{length}"
+    tests = ""
 
-for data_length in data_lengths:
-    # Generates coordinates
-    coords = generate_coordinates(data_length,True)
-    sorted_coords=sort_coordinates(coords)
+    # Run three times
+    for i in range(0, 3):
+        start = time.time()
+        # Process coordinates
+        coords = process_coordinates(getattr(test_data, data_name))
+        # Sort coordinates
+        sorted_coords = sort_coordinates(coords)
+        # Finds the quadrant for each coordinate set
+        find_quadrants(sorted_coords)
+        end = time.time()
+        # Add timings to CS string
+        tests += str(end - start) + ","
 
-    # Finds the quadrant for each coordinate pair
-    find_quadrants(sorted_coords)
+    # Format CSV
+    to_write += str(length) + "," + tests + '\n'
 
-end = time.time()
-print("time is ",end - start)
+# Write results to a CSV file - easier than pulling this information from the console
+with open('results_3.csv', 'w') as f:
+    f.write(to_write)
