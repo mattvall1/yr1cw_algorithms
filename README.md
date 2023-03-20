@@ -4,4 +4,5 @@ Whilst referring to the given text files and their co-ordinates, your task is to
 ## Notes
 - test_data.py is a large file with variables for automated testing purposes
 - The testing_analysis folder contains an Excel spreadsheet analysis plus outputted CSV files from each algorithm. These DO NOT match as have been run after the spreadsheet was written
+- The data_generator folder contains several custom generators for the different iterations of testing/analysis I used after each solution was completed by team members 
 - solution_4.py does not work. It is effectively draft work
