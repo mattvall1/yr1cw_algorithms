@@ -170,5 +170,5 @@ for length in lengths:
     to_write += str(length) + "," + tests + '\n'
 
 # Write results to a CSV file - easier than pulling this information from the console
-with open('results_3.csv', 'w') as f:
+with open('testing_analysis/results_3.csv', 'w') as f:
     f.write(to_write)
