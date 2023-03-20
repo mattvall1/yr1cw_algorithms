@@ -4,6 +4,6 @@ venv/
 .idea/
 data_generator/data.txt
 data_generator/__pycache__
-results_1.csv
-results_2.csv
-results_3.csv
+testing_analysis/results_1.csv
+testing_analysis/results_2.csv
+testing_analysis/results_3.csv
