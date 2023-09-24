@@ -1,4 +1,4 @@
-# 2023 Year 1 Algorithms - COMP1819 Coursework
+# 2023 Year 1 Algorithms - COMP1819 Coursework | University of Greenwich - Computer Science BSc
 ## The task
 Whilst referring to the given text files and their co-ordinates, your task is to determine which of the four quadrants the points fall into and return an appropriate statement stating where they fall. If the point falls onto one of the axes or the origin, then your code should recognise this and output an appropriate statement.
 ## Notes
